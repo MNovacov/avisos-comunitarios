@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/list"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Publicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="avisoForm" (ngSubmit)="guardarAviso()">
+  
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input formControlName="titulo"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="titulo?.invalid && titulo?.touched">
+      <p class="ion-padding-start" *ngIf="titulo?.errors?.['required']">El título es obligatorio.</p>
+      <p class="ion-padding-start" *ngIf="titulo?.errors?.['minlength']">Mínimo 5 caracteres.</p>
+    </ion-text>
+
+  
+    <ion-button expand="block" type="button" (click)="capturarFoto()" class="ion-margin-top">
+      📷 Fotografía
+    </ion-button>
+    <ion-img *ngIf="imagenPreview" [src]="imagenPreview" class="ion-margin-top"></ion-img>
+
+   
+    <ion-item class="ion-margin-top">
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea formControlName="descripcion"></ion-textarea>
+    </ion-item>
+    <ion-text color="danger" *ngIf="descripcion?.invalid && descripcion?.touched">
+      <p class="ion-padding-start" *ngIf="descripcion?.errors?.['required']">La descripción es obligatoria.</p>
+      <p class="ion-padding-start" *ngIf="descripcion?.errors?.['minlength']">Mínimo 20 caracteres.</p>
+    </ion-text>
+
+   
+    <ion-button expand="block" type="submit" [disabled]="avisoForm.invalid" class="ion-margin-top">
+      Guardar Aviso
+    </ion-button>
+  </form>
+</ion-content>
